@@ -6,13 +6,7 @@
 <title>Léa Dupont — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg:#F4F3EE; --surface:#FFF; --text:#1a1a1a; --muted:#6b6b6b;
-  --accent:#1A3AFF; --border:#e2e1da;
-  --r-card:24px; --r-pill:999px;
-  --shadow:0 2px 24px rgba(0,0,0,.07);
-  --ease:cubic-bezier(.4,0,.2,1); --dur:.35s;
-}
+:root{--bg:#F4F3EE;--surface:#FFF;--text:#1a1a1a;--muted:#6b6b6b;--accent:#1A3AFF;--border:#e2e1da;--r-card:24px;--r-pill:999px;--shadow:0 2px 28px rgba(0,0,0,.07);--ease:cubic-bezier(.4,0,.2,1);--dur:.35s}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -20,15 +14,10 @@ a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer}
 ul{list-style:none}
 
-/* ─── NAV ─── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 clamp(16px,5vw,48px);height:58px;
-  background:rgba(244,243,238,.9);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);
-  gap:10px;flex-wrap:wrap;
-}
+#mesh-canvas{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s}
+#mesh-canvas.hidden{opacity:0}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,5vw,48px);height:58px;background:rgba(244,243,238,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);gap:10px}
 .nav-logo{font-family:'DM Serif Display',serif;font-size:1rem;white-space:nowrap}
 .nav-center{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-pill);padding:4px}
 .nav-tab{padding:5px 16px;border-radius:var(--r-pill);border:none;background:transparent;font-size:.82rem;font-weight:500;color:var(--muted);transition:background var(--dur) var(--ease),color var(--dur) var(--ease);white-space:nowrap}
@@ -37,29 +26,18 @@ ul{list-style:none}
 .lang-btn{padding:5px 11px;border-radius:var(--r-pill);border:1.5px solid var(--border);background:transparent;font-size:.74rem;font-weight:600;color:var(--muted);letter-spacing:.04em;transition:all var(--dur) var(--ease)}
 .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
 .lang-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+@media(max-width:560px){.nav{padding:8px 14px;flex-wrap:wrap;height:auto}.nav-tab{padding:5px 10px;font-size:.76rem}.lang-btn{padding:4px 8px;font-size:.68rem}}
 
-@media(max-width:560px){
-  .nav{height:auto;padding:8px 14px}
-  .nav-tab{padding:5px 10px;font-size:.76rem}
-  .lang-btn{padding:4px 8px;font-size:.68rem}
-}
-
-/* ─── PAGES ─── */
-.page-view{display:none;padding-top:72px;min-height:100vh;animation:fadeUp .4s var(--ease) both}
+.page-view{display:none;padding-top:72px;padding-bottom:60px;min-height:100vh;position:relative;z-index:1;animation:fadeUp .4s var(--ease) both}
 .page-view.active{display:block}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .container{max-width:860px;margin:0 auto;padding:clamp(18px,4vw,40px) clamp(14px,4vw,24px) 60px}
 
-/* ─── HERO ─── */
-.hero{
-  display:grid;grid-template-columns:auto 1fr;
-  gap:clamp(18px,5vw,48px);align-items:center;
-  background:var(--surface);border-radius:var(--r-card);
-  padding:clamp(22px,5vw,44px);box-shadow:var(--shadow);
-  margin-bottom:20px;position:relative;overflow:hidden;
-}
-.hero::before{content:'';position:absolute;top:-55px;left:-55px;width:200px;height:200px;border:2px solid var(--accent);border-radius:50%;opacity:.12}
-.hero::after{content:'';position:absolute;bottom:-40px;right:-40px;width:150px;height:150px;border:2px solid var(--accent);border-radius:50%;opacity:.08}
+.glass{background:rgba(255,255,255,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.7);box-shadow:var(--shadow),0 0 0 .5px rgba(26,58,255,.06)}
+
+.hero{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,5vw,48px);align-items:center;border-radius:var(--r-card);padding:clamp(22px,5vw,44px);margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-55px;left:-55px;width:200px;height:200px;border:2px solid var(--accent);border-radius:50%;opacity:.11}
+.hero::after{content:'';position:absolute;bottom:-40px;right:-40px;width:150px;height:150px;border:2px solid var(--accent);border-radius:50%;opacity:.07}
 .avatar-wrap{position:relative;width:clamp(110px,18vw,165px);height:clamp(110px,18vw,165px);flex-shrink:0}
 .avatar-ring{position:absolute;inset:-10px;border:2px solid var(--accent);border-radius:50%;border-top-color:transparent;border-right-color:transparent;animation:spin 16s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -68,30 +46,23 @@ ul{list-style:none}
 .hero-name{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,4vw,2.8rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:4px}
 .hero-title{font-family:'DM Serif Display',serif;font-style:italic;color:var(--muted);font-size:clamp(.88rem,2vw,1.1rem);margin-bottom:18px}
 .contact-pills{display:flex;flex-wrap:wrap;gap:8px}
-.cpill{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border:1.5px solid var(--border);border-radius:var(--r-pill);font-size:.82rem;color:var(--text);transition:all var(--dur) var(--ease)}
-.cpill:hover{border-color:var(--accent);color:var(--accent);transform:translateX(3px)}
+.cpill{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border:1.5px solid rgba(226,225,218,.8);border-radius:var(--r-pill);font-size:.82rem;color:var(--text);background:rgba(255,255,255,.6);transition:all var(--dur) var(--ease)}
+.cpill:hover{border-color:var(--accent);color:var(--accent);transform:translateX(3px);background:#fff}
 @media(max-width:540px){.hero{grid-template-columns:1fr;text-align:center}.avatar-wrap{margin:0 auto}.contact-pills{justify-content:center}}
 
-/* ─── BODY GRID ─── */
 .body-grid{display:grid;grid-template-columns:188px 1fr;gap:18px}
 @media(max-width:660px){.body-grid{grid-template-columns:1fr}}
 .sidebar{display:flex;flex-direction:column;gap:14px}
 @media(max-width:660px){.sidebar{flex-direction:row;flex-wrap:wrap}.sidebar .card{flex:1;min-width:140px}}
-
-/* ─── CARD ─── */
-.card{background:var(--surface);border-radius:var(--r-card);padding:clamp(18px,4vw,26px);box-shadow:var(--shadow)}
+.card{border-radius:var(--r-card);padding:clamp(18px,4vw,26px)}
 .card-title{font-size:.67rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
 .lang-list{display:flex;flex-direction:column;gap:9px}
 .lang-list li{font-size:.85rem;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.lvl{font-size:.71rem;font-weight:500;color:var(--muted);background:var(--bg);padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap}
+.lvl{font-size:.71rem;font-weight:500;color:var(--muted);background:rgba(244,243,238,.9);padding:2px 9px;border-radius:var(--r-pill);white-space:nowrap}
 .skills-list{display:flex;flex-direction:column;gap:7px}
 .skills-list li{font-size:.85rem;padding-left:14px;position:relative}
 .skills-list li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:5px;background:var(--accent);border-radius:50%}
-
-/* ─── SECTION HEADING ─── */
 .sec-h{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:500;border:1.5px solid var(--border);border-radius:var(--r-pill);padding:5px 17px;margin-bottom:22px}
-
-/* ─── EXP ITEM ─── */
 .exp-item{padding-left:15px;margin-bottom:20px;position:relative;cursor:pointer}
 .exp-item:last-child{margin-bottom:0}
 .exp-item::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--accent);border-radius:50%;transition:transform var(--dur) var(--ease)}
@@ -101,7 +72,7 @@ ul{list-style:none}
 .tag{display:inline-flex;align-items:center;padding:3px 11px;border-radius:var(--r-pill);font-size:.74rem;font-weight:500}
 .tb{background:var(--accent);color:#fff}
 .to{border:1.5px solid var(--border);color:var(--muted);background:transparent}
-.exp-hint{font-size:.72rem;color:var(--accent);opacity:.65;margin-top:3px;transition:opacity var(--dur) var(--ease)}
+.exp-hint{font-size:.72rem;color:var(--accent);opacity:.6;margin-top:3px;transition:opacity var(--dur)}
 .exp-item:hover .exp-hint{opacity:1}
 .exp-item.open .exp-hint{opacity:0;height:0;overflow:hidden;margin:0}
 .exp-details{max-height:0;overflow:hidden;opacity:0;transition:max-height .42s var(--ease),opacity .35s var(--ease)}
@@ -109,54 +80,76 @@ ul{list-style:none}
 .exp-bullets{display:flex;flex-direction:column;gap:5px;margin-top:10px}
 .exp-bullets li{font-size:.83rem;color:var(--muted);padding-left:14px;position:relative}
 .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.76rem}
-.div{height:1px;background:var(--border);margin:17px 0}
+.divr{height:1px;background:var(--border);margin:17px 0}
 
-/* ─── PROJECTS ─── */
 .proj-header{margin-bottom:26px}
 .proj-header h2{font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,4vw,2.1rem);margin-bottom:7px}
 .proj-header p{font-size:.9rem;color:var(--muted)}
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:16px}
-.proj-card{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);border:1.5px solid transparent}
-.proj-card:hover{transform:translateY(-4px);box-shadow:0 10px 36px rgba(26,58,255,.14);border-color:var(--accent)}
-.proj-thumb{height:136px;display:flex;align-items:center;justify-content:center;font-size:46px;position:relative;overflow:hidden}
-.proj-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(0,0,0,.07))}
+.proj-card{background:rgba(255,255,255,.92);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),border-color var(--dur) var(--ease);border:1.5px solid transparent}
+.proj-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(26,58,255,.14);border-color:var(--accent)}
+.proj-thumb{height:148px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.proj-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.proj-card:hover .proj-thumb img{transform:scale(1.05)}
+.proj-thumb-emoji{font-size:46px;position:relative;z-index:1;pointer-events:none}
+.proj-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.18));z-index:2}
+.proj-thumb-overlay{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;background:rgba(26,58,255,.55);color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.06em;opacity:0;transition:opacity var(--dur)}
+.proj-card:hover .proj-thumb-overlay{opacity:1}
 .proj-body{padding:18px 20px 20px}
 .proj-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
-.proj-title{font-weight:600;font-size:.94rem;margin-bottom:5px;transition:color var(--dur) var(--ease)}
+.proj-title{font-weight:600;font-size:.94rem;margin-bottom:5px;transition:color var(--dur)}
 .proj-card:hover .proj-title{color:var(--accent)}
 .proj-desc{font-size:.81rem;color:var(--muted);line-height:1.55}
 
-/* ─── MODAL ─── */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:16px}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px}
 .modal-overlay.open{display:flex;animation:mfade .25s var(--ease)}
 @keyframes mfade{from{opacity:0}to{opacity:1}}
-.modal{background:var(--surface);border-radius:var(--r-card);max-width:510px;width:100%;max-height:88vh;overflow-y:auto;padding:clamp(22px,5vw,38px);position:relative;animation:mup .3s var(--ease)}
+.modal{background:var(--surface);border-radius:var(--r-card);max-width:580px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:mup .3s var(--ease);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.modal::-webkit-scrollbar{width:4px}
+.modal::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px}
 @keyframes mup{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-.m-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;font-size:.95rem;color:var(--muted);transition:all var(--dur) var(--ease)}
-.m-close:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-.m-icon{font-size:42px;margin-bottom:14px}
-.m-title{font-family:'DM Serif Display',serif;font-size:1.55rem;margin-bottom:8px}
-.m-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.m-sec{margin-top:16px}
-.m-lbl{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
-.m-desc{font-size:.88rem;color:var(--muted);line-height:1.65}
-.m-list{display:flex;flex-direction:column;gap:5px}
+.m-close{position:absolute;top:14px;right:14px;z-index:10;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,.55);background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;transition:all var(--dur)}
+.m-close:hover{background:var(--accent);border-color:var(--accent)}
+.m-banner{width:100%;height:210px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border-radius:var(--r-card) var(--r-card) 0 0;flex-shrink:0}
+.m-banner img{width:100%;height:100%;object-fit:cover}
+.m-banner-emoji{font-size:60px;z-index:1}
+.m-banner::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to top,var(--surface),transparent);z-index:2}
+.m-body{padding:clamp(18px,5vw,32px)}
+.m-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.m-title{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:16px}
+.m-sec{margin-top:18px}
+.m-lbl{font-size:.67rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.m-desc{font-size:.88rem;color:var(--muted);line-height:1.67}
+.m-list{display:flex;flex-direction:column;gap:6px}
 .m-list li{font-size:.86rem;color:var(--muted);padding-left:14px;position:relative;line-height:1.5}
 .m-list li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.78rem}
-.m-link{display:inline-flex;align-items:center;gap:7px;margin-top:18px;padding:9px 20px;background:var(--accent);color:#fff;border-radius:var(--r-pill);font-size:.84rem;font-weight:500;transition:opacity var(--dur)}
+.m-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:10px;margin-top:10px}
+.m-gallery-item{border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--bg);border:1.5px solid var(--border);position:relative;cursor:zoom-in}
+.m-gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+.m-gallery-item:hover img{transform:scale(1.04)}
+.m-gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:.76rem;background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 8px,rgba(26,58,255,.04) 8px,rgba(26,58,255,.04) 16px)}
+.m-gallery-placeholder svg{opacity:.3}
+.m-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.m-link{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:var(--accent);color:#fff;border-radius:var(--r-pill);font-size:.84rem;font-weight:500;transition:opacity var(--dur);border:none;cursor:pointer}
 .m-link:hover{opacity:.85}
+.m-link-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.m-link-ghost:hover{border-color:var(--accent);color:var(--accent);opacity:1}
 
-/* ─── ANIMATIONS ─── */
+.lightbox{display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.88);align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lightbox.open{display:flex;animation:mfade .2s var(--ease)}
+.lightbox img{max-width:100%;max-height:90vh;border-radius:16px;object-fit:contain;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.lightbox-close{position:fixed;top:18px;right:18px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--dur)}
+.lightbox-close:hover{background:var(--accent);border-color:var(--accent)}
+
 .fade-up{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
 .fade-up.visible{opacity:1;transform:translateY(0)}
-
-/* ─── FOOTER ─── */
 .footer{text-align:center;margin-top:44px;font-size:.73rem;color:var(--muted);letter-spacing:.04em}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<canvas id="mesh-canvas"></canvas>
+
 <nav class="nav">
   <div class="nav-logo">Léa Dupont</div>
   <div class="nav-center">
@@ -170,34 +163,23 @@ ul{list-style:none}
   </div>
 </nav>
 
-<!-- ═══ PAGE: RESUME ═══ -->
 <div id="page-resume" class="page-view active">
 <div class="container">
-
-  <div class="hero fade-up">
-    <div class="avatar-wrap">
-      <div class="avatar-ring"></div>
-      <div class="avatar-face">👩‍💻</div>
-    </div>
+  <div class="hero glass fade-up">
+    <div class="avatar-wrap"><div class="avatar-ring"></div><div class="avatar-face">👩‍💻</div></div>
     <div class="hero-info">
       <h1 class="hero-name">LÉA DUPONT</h1>
       <p class="hero-title" data-i18n="title">數位專案經理</p>
       <div class="contact-pills">
-        <a href="mailto:hello@reallygreatsite.com" class="cpill">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
-          hello@reallygreatsite.com
-        </a>
-        <a href="tel:+1234567890" class="cpill">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.34h3a2 2 0 0 1 2 1.72c.14.72.37 1.45.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.13 6.13l1.02-.86a2 2 0 0 1 2.11-.45c.81.17 1.63.35 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          +123-456-7890
-        </a>
+        <a href="mailto:hello@reallygreatsite.com" class="cpill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>hello@reallygreatsite.com</a>
+        <a href="tel:+1234567890" class="cpill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.34h3a2 2 0 0 1 2 1.72c.14.72.37 1.45.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.13 6.13l1.02-.86a2 2 0 0 1 2.11-.45c.81.17 1.63.35 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+123-456-7890</a>
       </div>
     </div>
   </div>
 
   <div class="body-grid">
     <div class="sidebar">
-      <div class="card fade-up">
+      <div class="card glass fade-up">
         <div class="card-title" data-i18n="languages">語言能力</div>
         <ul class="lang-list">
           <li><span data-i18n="l-fr">法語</span><span class="lvl" data-i18n="native">母語</span></li>
@@ -206,96 +188,61 @@ ul{list-style:none}
           <li><span data-i18n="l-ko">韓語</span><span class="lvl">A2</span></li>
         </ul>
       </div>
-      <div class="card fade-up">
+      <div class="card glass fade-up">
         <div class="card-title" data-i18n="skills-lbl">專業技能</div>
         <ul class="skills-list">
-          <li data-i18n="sk1">團隊協作</li>
-          <li data-i18n="sk2">網路行銷溝通</li>
-          <li data-i18n="sk3">行銷策略規劃</li>
-          <li data-i18n="sk4">敏捷專案管理</li>
+          <li data-i18n="sk1">團隊協作</li><li data-i18n="sk2">網路行銷溝通</li>
+          <li data-i18n="sk3">行銷策略規劃</li><li data-i18n="sk4">敏捷專案管理</li>
           <li data-i18n="sk5">AI 工具應用</li>
         </ul>
       </div>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:16px">
-      <!-- Experience -->
-      <div class="card fade-up">
-        <div class="sec-h">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
-          <span data-i18n="experience">工作經歷</span>
-        </div>
+      <div class="card glass fade-up">
+        <div class="sec-h"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span data-i18n="experience">工作經歷</span></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="j1t">數位專案經理</div>
           <div class="exp-meta"><span class="tag tb">Liceria, Inc.</span><span class="tag to">2024–2025</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="j1b1">規劃與管理線上行銷活動</li>
-            <li data-i18n="j1b2">協調跨部門團隊合作</li>
-            <li data-i18n="j1b3">追蹤時程與預算控管</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="j1b1">規劃與管理線上行銷活動</li><li data-i18n="j1b2">協調跨部門團隊合作</li><li data-i18n="j1b3">追蹤時程與預算控管</li></ul></div>
         </div>
-        <div class="div"></div>
+        <div class="divr"></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="j2t">數位行銷主管</div>
           <div class="exp-meta"><span class="tag tb">Liceria, Inc.</span><span class="tag to">2022–2023</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="j2b1">網站內容創作與規劃</li>
-            <li data-i18n="j2b2">SEO 優化與效能提升</li>
-            <li data-i18n="j2b3">分析成效數據與 KPI</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="j2b1">網站內容創作與規劃</li><li data-i18n="j2b2">SEO 優化與效能提升</li><li data-i18n="j2b3">分析成效數據與 KPI</li></ul></div>
         </div>
-        <div class="div"></div>
+        <div class="divr"></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="j3t">公關傳播專員</div>
           <div class="exp-meta"><span class="tag tb">Shodwe, Inc.</span><span class="tag to">2020–2021</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="j3b1">管理對外合作夥伴關係</li>
-            <li data-i18n="j3b2">執行促銷與推廣活動</li>
-            <li data-i18n="j3b3">追蹤成效報告與指標</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="j3b1">管理對外合作夥伴關係</li><li data-i18n="j3b2">執行促銷與推廣活動</li><li data-i18n="j3b3">追蹤成效報告與指標</li></ul></div>
         </div>
       </div>
-
-      <!-- Education -->
-      <div class="card fade-up">
-        <div class="sec-h">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          <span data-i18n="education">學歷</span>
-        </div>
+      <div class="card glass fade-up">
+        <div class="sec-h"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><span data-i18n="education">學歷</span></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="e1t">碩士 | 數位管理</div>
           <div class="exp-meta"><span class="tag tb" data-i18n="univ">任意城市大學</span><span class="tag to">2020–2022</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="e1b1">複雜專案統籌管理</li>
-            <li data-i18n="e1b2">數位轉型與策略規劃</li>
-            <li data-i18n="e1b3">數據分析與 KPI 應用</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="e1b1">複雜專案統籌管理</li><li data-i18n="e1b2">數位轉型與策略規劃</li><li data-i18n="e1b3">數據分析與 KPI 應用</li></ul></div>
         </div>
-        <div class="div"></div>
+        <div class="divr"></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="e2t">學士 | 傳播學</div>
           <div class="exp-meta"><span class="tag tb" data-i18n="univ">任意城市大學</span><span class="tag to">2019–2020</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="e2b1">數位與社群媒體策略</li>
-            <li data-i18n="e2b2">市場分析與 SEO</li>
-            <li data-i18n="e2b3">文案撰寫與內容敘事</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="e2b1">數位與社群媒體策略</li><li data-i18n="e2b2">市場分析與 SEO</li><li data-i18n="e2b3">文案撰寫與內容敘事</li></ul></div>
         </div>
-        <div class="div"></div>
+        <div class="divr"></div>
         <div class="exp-item" onclick="this.classList.toggle('open')">
           <div class="exp-role" data-i18n="e3t">專科 | 傳播學</div>
           <div class="exp-meta"><span class="tag tb" data-i18n="univ">任意城市大學</span><span class="tag to">2018–2019</span></div>
           <div class="exp-hint" data-i18n="expand-hint">↓ 點擊展開詳情</div>
-          <div class="exp-details"><ul class="exp-bullets">
-            <li data-i18n="e3b1">數位內容製作</li>
-            <li data-i18n="e3b2">網站專案管理</li>
-            <li data-i18n="e3b3">數位行銷基礎</li>
-          </ul></div>
+          <div class="exp-details"><ul class="exp-bullets"><li data-i18n="e3b1">數位內容製作</li><li data-i18n="e3b2">網站專案管理</li><li data-i18n="e3b3">數位行銷基礎</li></ul></div>
         </div>
       </div>
     </div>
@@ -304,252 +251,161 @@ ul{list-style:none}
 </div>
 </div>
 
-<!-- ═══ PAGE: PROJECTS ═══ -->
 <div id="page-projects" class="page-view">
 <div class="container">
-  <div class="proj-header fade-up">
-    <h2 data-i18n="proj-heading">重點專案</h2>
-    <p data-i18n="proj-sub">點擊卡片查看專案詳情與成果</p>
-  </div>
-  <div class="proj-grid">
-    <div class="proj-card fade-up" onclick="openModal('p1')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#e0e4ff,#c8d0ff)">🛍️</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb" data-i18n="p1-tag1">電商</span><span class="tag to">SEO</span></div>
-        <div class="proj-title" data-i18n="p1-title">Liceria 品牌電商全站改版</div>
-        <div class="proj-desc" data-i18n="p1-desc">主導品牌官網重構，整合 SEO 策略與 UX 優化，有效提升有機流量。</div>
-      </div>
-    </div>
-    <div class="proj-card fade-up" onclick="openModal('p2')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#d4f5e9,#a8e6cc)">📊</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb" data-i18n="p2-tag1">行銷</span><span class="tag to">KPI</span></div>
-        <div class="proj-title" data-i18n="p2-title">數位行銷 KPI 儀表板</div>
-        <div class="proj-desc" data-i18n="p2-desc">建立即時行銷數據追蹤系統，整合多平台數據，提升決策效率。</div>
-      </div>
-    </div>
-    <div class="proj-card fade-up" onclick="openModal('p3')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#fff0d4,#ffd99a)">🤖</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb">AI</span><span class="tag to" data-i18n="p3-tag2">自動化</span></div>
-        <div class="proj-title" data-i18n="p3-title">AI 內容自動化工作流</div>
-        <div class="proj-desc" data-i18n="p3-desc">導入 AI 工具實現內容生產自動化，大幅縮短製作週期。</div>
-      </div>
-    </div>
-    <div class="proj-card fade-up" onclick="openModal('p4')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#ffe0f0,#ffb3d6)">📣</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb" data-i18n="p4-tag1">公關</span><span class="tag to" data-i18n="p4-tag2">活動</span></div>
-        <div class="proj-title" data-i18n="p4-title">Shodwe 年度品牌推廣活動</div>
-        <div class="proj-desc" data-i18n="p4-desc">統籌執行跨通路品牌推廣計畫，管理多個外部合作夥伴。</div>
-      </div>
-    </div>
-    <div class="proj-card fade-up" onclick="openModal('p5')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#e8f0fe,#b8ccfe)">📱</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb" data-i18n="p5-tag1">社群</span><span class="tag to" data-i18n="p5-tag2">內容策略</span></div>
-        <div class="proj-title" data-i18n="p5-title">社群媒體增長策略</div>
-        <div class="proj-desc" data-i18n="p5-desc">制定並執行跨平台社群內容策略，顯著提升品牌互動率。</div>
-      </div>
-    </div>
-    <div class="proj-card fade-up" onclick="openModal('p6')">
-      <div class="proj-thumb" style="background:linear-gradient(135deg,#f0ffe8,#c8f5a8)">🎓</div>
-      <div class="proj-body">
-        <div class="proj-tags"><span class="tag tb" data-i18n="p6-tag1">研究</span><span class="tag to" data-i18n="p6-tag2">策略</span></div>
-        <div class="proj-title" data-i18n="p6-title">數位轉型策略研究論文</div>
-        <div class="proj-desc" data-i18n="p6-desc">碩士畢業研究，聚焦中小企業數位轉型路徑與成效評估框架。</div>
-      </div>
-    </div>
-  </div>
+  <div class="proj-header fade-up"><h2 data-i18n="proj-heading">重點專案</h2><p data-i18n="proj-sub">點擊卡片查看詳情與成果</p></div>
+  <div class="proj-grid" id="proj-grid"></div>
   <div class="footer fade-up" style="margin-top:36px"><span data-i18n="footer">© 2025 Léa Dupont — 數位專案經理</span></div>
 </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modal-overlay" onclick="closeOut(event)">
   <div class="modal">
     <button class="m-close" onclick="closeModal()">✕</button>
-    <div class="m-icon" id="m-icon"></div>
-    <h2 class="m-title" id="m-title"></h2>
-    <div class="m-tags" id="m-tags"></div>
-    <div class="m-sec">
-      <div class="m-lbl" id="m-ov-lbl"></div>
-      <p class="m-desc" id="m-overview"></p>
+    <div class="m-banner" id="m-banner"></div>
+    <div class="m-body">
+      <div class="m-tags" id="m-tags"></div>
+      <h2 class="m-title" id="m-title"></h2>
+      <div class="m-sec"><div class="m-lbl" id="m-ov-lbl"></div><p class="m-desc" id="m-overview"></p></div>
+      <div class="m-sec" id="m-gallery-sec"><div class="m-lbl" id="m-gallery-lbl"></div><div class="m-gallery" id="m-gallery"></div></div>
+      <div class="m-sec"><div class="m-lbl" id="m-res-lbl"></div><ul class="m-list" id="m-results"></ul></div>
+      <div class="m-actions" id="m-actions"></div>
     </div>
-    <div class="m-sec">
-      <div class="m-lbl" id="m-res-lbl"></div>
-      <ul class="m-list" id="m-results"></ul>
-    </div>
-    <a href="#" class="m-link" id="m-link" target="_blank">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      <span id="m-link-txt"></span>
-    </a>
   </div>
 </div>
 
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script>
-/* ── i18n ── */
-const D = {
-  zh:{
-    "nav-resume":"履歷","nav-projects":"專案","title":"數位專案經理",
-    "languages":"語言能力","l-fr":"法語","l-en":"英語","l-es":"西班牙語","l-ko":"韓語","native":"母語",
-    "skills-lbl":"專業技能","sk1":"團隊協作","sk2":"網路行銷溝通","sk3":"行銷策略規劃","sk4":"敏捷專案管理","sk5":"AI 工具應用",
-    "experience":"工作經歷","expand-hint":"↓ 點擊展開詳情",
-    "j1t":"數位專案經理","j1b1":"規劃與管理線上行銷活動","j1b2":"協調跨部門團隊合作","j1b3":"追蹤時程與預算控管",
-    "j2t":"數位行銷主管","j2b1":"網站內容創作與規劃","j2b2":"SEO 優化與效能提升","j2b3":"分析成效數據與 KPI",
-    "j3t":"公關傳播專員","j3b1":"管理對外合作夥伴關係","j3b2":"執行促銷與推廣活動","j3b3":"追蹤成效報告與指標",
-    "education":"學歷","univ":"任意城市大學",
-    "e1t":"碩士 | 數位管理","e1b1":"複雜專案統籌管理","e1b2":"數位轉型與策略規劃","e1b3":"數據分析與 KPI 應用",
-    "e2t":"學士 | 傳播學","e2b1":"數位與社群媒體策略","e2b2":"市場分析與 SEO","e2b3":"文案撰寫與內容敘事",
-    "e3t":"專科 | 傳播學","e3b1":"數位內容製作","e3b2":"網站專案管理","e3b3":"數位行銷基礎",
-    "proj-heading":"重點專案","proj-sub":"點擊卡片查看專案詳情與成果",
-    "p1-tag1":"電商","p1-title":"Liceria 品牌電商全站改版","p1-desc":"主導品牌官網重構，整合 SEO 策略與 UX 優化，有效提升有機流量。",
-    "p2-tag1":"行銷","p2-title":"數位行銷 KPI 儀表板","p2-desc":"建立即時行銷數據追蹤系統，整合多平台數據，提升決策效率。",
-    "p3-tag2":"自動化","p3-title":"AI 內容自動化工作流","p3-desc":"導入 AI 工具實現內容生產自動化，大幅縮短製作週期。",
-    "p4-tag1":"公關","p4-tag2":"活動","p4-title":"Shodwe 年度品牌推廣活動","p4-desc":"統籌執行跨通路品牌推廣計畫，管理多個外部合作夥伴。",
-    "p5-tag1":"社群","p5-tag2":"內容策略","p5-title":"社群媒體增長策略","p5-desc":"制定並執行跨平台社群內容策略，顯著提升品牌互動率。",
-    "p6-tag1":"研究","p6-tag2":"策略","p6-title":"數位轉型策略研究論文","p6-desc":"碩士畢業研究，聚焦中小企業數位轉型路徑與成效評估框架。",
-    "m-overview":"專案概述","m-results":"主要成果","view-project":"查看專案",
-    "footer":"© 2025 Léa Dupont — 數位專案經理"
-  },
-  en:{
-    "nav-resume":"Resume","nav-projects":"Projects","title":"Digital Project Manager",
-    "languages":"Languages","l-fr":"French","l-en":"English","l-es":"Spanish","l-ko":"Korean","native":"Native",
-    "skills-lbl":"Skills","sk1":"Team Collaboration","sk2":"Web Communication","sk3":"Marketing Strategy","sk4":"Agile Management","sk5":"AI Tools",
-    "experience":"Experience","expand-hint":"↓ Click to expand",
-    "j1t":"Digital Project Manager","j1b1":"Manage online campaigns","j1b2":"Coordinate cross-functional teams","j1b3":"Track deadlines & budgets",
-    "j2t":"Digital Marketing Manager","j2b1":"Web content creation","j2b2":"SEO & performance optimization","j2b3":"Analyze results & KPIs",
-    "j3t":"Communications Officer","j3b1":"Manage external partnerships","j3b2":"Execute promotional activities","j3b3":"Monitor reporting & indicators",
-    "education":"Education","univ":"Univ. Any City",
-    "e1t":"Master's | Digital Management","e1b1":"Complex project management","e1b2":"Digital transformation & strategy","e1b3":"Data analysis & KPIs",
-    "e2t":"Bachelor's | Communication","e2b1":"Digital & social media strategy","e2b2":"Market analysis & SEO","e2b3":"Writing & storytelling",
-    "e3t":"DUT | Communication","e3b1":"Digital content creation","e3b2":"Web project management","e3b3":"Digital marketing basics",
-    "proj-heading":"Featured Projects","proj-sub":"Click a card to view project details",
-    "p1-tag1":"E-commerce","p1-title":"Liceria Brand Website Revamp","p1-desc":"Led full site rebuild integrating SEO strategy and UX improvements to boost organic traffic.",
-    "p2-tag1":"Marketing","p2-title":"Digital Marketing KPI Dashboard","p2-desc":"Built a real-time marketing analytics system aggregating data from multiple platforms.",
-    "p3-tag2":"Automation","p3-title":"AI Content Automation Workflow","p3-desc":"Implemented AI tools to automate content production, significantly reducing turnaround time.",
-    "p4-tag1":"PR","p4-tag2":"Events","p4-title":"Shodwe Annual Brand Campaign","p4-desc":"Orchestrated a cross-channel brand campaign managing multiple external partners.",
-    "p5-tag1":"Social","p5-tag2":"Content Strategy","p5-title":"Social Media Growth Strategy","p5-desc":"Designed and executed a cross-platform content strategy to boost brand engagement.",
-    "p6-tag1":"Research","p6-tag2":"Strategy","p6-title":"Digital Transformation Research Thesis","p6-desc":"Master's thesis focused on digital transformation pathways and KPI evaluation for SMEs.",
-    "m-overview":"Overview","m-results":"Key Results","view-project":"View Project",
-    "footer":"© 2025 Léa Dupont — Digital Project Manager"
-  },
-  ja:{
-    "nav-resume":"履歴書","nav-projects":"プロジェクト","title":"デジタルPM",
-    "languages":"言語スキル","l-fr":"フランス語","l-en":"英語","l-es":"スペイン語","l-ko":"韓国語","native":"母国語",
-    "skills-lbl":"スキル","sk1":"チームワーク","sk2":"Webコミュニケーション","sk3":"マーケティング戦略","sk4":"アジャイル管理","sk5":"AIツール活用",
-    "experience":"職歴","expand-hint":"↓ クリックして展開",
-    "j1t":"デジタルPM","j1b1":"オンラインキャンペーン管理","j1b2":"チーム横断コーディネート","j1b3":"スケジュール・予算管理",
-    "j2t":"デジタルマーケティングMgr","j2b1":"Webコンテンツ制作","j2b2":"SEO・パフォーマンス最適化","j2b3":"結果・KPI分析",
-    "j3t":"コミュニケーション担当","j3b1":"外部パートナー管理","j3b2":"プロモーション活動展開","j3b3":"レポーティング管理",
-    "education":"学歴","univ":"エニーシティ大学",
-    "e1t":"修士 | デジタル経営","e1b1":"複雑プロジェクト管理","e1b2":"デジタル変革と戦略","e1b3":"データ分析とKPI",
-    "e2t":"学士 | コミュニケーション","e2b1":"デジタル・SNS戦略","e2b2":"市場分析とSEO","e2b3":"ライティングとストーリーテリング",
-    "e3t":"準学士 | コミュニケーション","e3b1":"デジタルコンテンツ制作","e3b2":"Webプロジェクト管理","e3b3":"デジタルマーケティング基礎",
-    "proj-heading":"注目プロジェクト","proj-sub":"カードをクリックして詳細を確認",
-    "p1-tag1":"EC","p1-title":"Liceria ブランドサイト刷新","p1-desc":"SEO戦略とUX改善を統合したサイト全面リニューアルを主導。",
-    "p2-tag1":"マーケティング","p2-title":"デジタルKPIダッシュボード","p2-desc":"複数プラットフォームのデータを統合したリアルタイム分析システムを構築。",
-    "p3-tag2":"自動化","p3-title":"AIコンテンツ自動化ワークフロー","p3-desc":"AIツールを導入しコンテンツ制作を自動化、制作期間を大幅短縮。",
-    "p4-tag1":"PR","p4-tag2":"イベント","p4-title":"Shodwe 年間ブランドキャンペーン","p4-desc":"クロスチャネルのブランドキャンペーンを統括、複数パートナーを管理。",
-    "p5-tag1":"SNS","p5-tag2":"コンテンツ戦略","p5-title":"SNS成長戦略","p5-desc":"クロスプラットフォームのコンテンツ戦略を策定・実行しエンゲージメントを向上。",
-    "p6-tag1":"研究","p6-tag2":"戦略","p6-title":"デジタル変革戦略研究論文","p6-desc":"中小企業のデジタル変革経路とKPI評価フレームワークに焦点を当てた修士論文。",
-    "m-overview":"概要","m-results":"主な成果","view-project":"プロジェクトを見る",
-    "footer":"© 2025 Léa Dupont — デジタルPM"
+(function(){
+  const canvas=document.getElementById('mesh-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,raf,active=true,t=0;
+  const ORBS=[
+    {ox:.15,oy:.20,r:.55,color:[200,208,255],sx:.00018,sy:.00012,ph:0},
+    {ox:.78,oy:.15,r:.45,color:[180,200,255],sx:-.00014,sy:.00016,ph:1.3},
+    {ox:.50,oy:.70,r:.60,color:[220,224,255],sx:.00010,sy:-.00018,ph:2.6},
+    {ox:.85,oy:.75,r:.40,color:[200,230,255],sx:-.00016,sy:-.00010,ph:3.9},
+    {ox:.30,oy:.50,r:.35,color:[255,248,220],sx:.00012,sy:.00014,ph:5.2}
+  ];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+  function draw(){
+    if(!active){cancelAnimationFrame(raf);return}
+    t++;
+    ctx.fillStyle='#F4F3EE';ctx.fillRect(0,0,W,H);
+    ORBS.forEach(o=>{
+      const x=(o.ox+Math.sin(t*o.sx+o.ph)*.28)*W;
+      const y=(o.oy+Math.cos(t*o.sy+o.ph)*.22)*H;
+      const r=o.r*Math.max(W,H);
+      const g=ctx.createRadialGradient(x,y,0,x,y,r);
+      const[cr,cg,cb]=o.color;
+      g.addColorStop(0,`rgba(${cr},${cg},${cb},.52)`);
+      g.addColorStop(.5,`rgba(${cr},${cg},${cb},.18)`);
+      g.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+      ctx.globalCompositeOperation='multiply';
+      ctx.fillStyle=g;
+      ctx.beginPath();
+      ctx.ellipse(x,y,r*.9,r*.7,Math.sin(t*.0003+o.ph)*.4,0,Math.PI*2);
+      ctx.fill();
+    });
+    ctx.globalCompositeOperation='source-over';
+    raf=requestAnimationFrame(draw);
   }
+  window.addEventListener('resize',resize);
+  resize();draw();
+  window._mesh={start(){active=true;draw()},stop(){active=false}};
+})();
+
+const D={
+  zh:{"nav-resume":"履歷","nav-projects":"專案","title":"數位專案經理","languages":"語言能力","l-fr":"法語","l-en":"英語","l-es":"西班牙語","l-ko":"韓語","native":"母語","skills-lbl":"專業技能","sk1":"團隊協作","sk2":"網路行銷溝通","sk3":"行銷策略規劃","sk4":"敏捷專案管理","sk5":"AI 工具應用","experience":"工作經歷","expand-hint":"↓ 點擊展開詳情","j1t":"數位專案經理","j1b1":"規劃與管理線上行銷活動","j1b2":"協調跨部門團隊合作","j1b3":"追蹤時程與預算控管","j2t":"數位行銷主管","j2b1":"網站內容創作與規劃","j2b2":"SEO 優化與效能提升","j2b3":"分析成效數據與 KPI","j3t":"公關傳播專員","j3b1":"管理對外合作夥伴關係","j3b2":"執行促銷與推廣活動","j3b3":"追蹤成效報告與指標","education":"學歷","univ":"任意城市大學","e1t":"碩士 | 數位管理","e1b1":"複雜專案統籌管理","e1b2":"數位轉型與策略規劃","e1b3":"數據分析與 KPI 應用","e2t":"學士 | 傳播學","e2b1":"數位與社群媒體策略","e2b2":"市場分析與 SEO","e2b3":"文案撰寫與內容敘事","e3t":"專科 | 傳播學","e3b1":"數位內容製作","e3b2":"網站專案管理","e3b3":"數位行銷基礎","proj-heading":"重點專案","proj-sub":"點擊卡片查看詳情與成果","m-overview":"專案概述","m-gallery":"專案截圖","m-results":"主要成果","view-project":"查看專案","view-github":"GitHub","img-placeholder":"點擊替換為你的截圖","footer":"© 2025 Léa Dupont — 數位專案經理"},
+  en:{"nav-resume":"Resume","nav-projects":"Projects","title":"Digital Project Manager","languages":"Languages","l-fr":"French","l-en":"English","l-es":"Spanish","l-ko":"Korean","native":"Native","skills-lbl":"Skills","sk1":"Team Collaboration","sk2":"Web Communication","sk3":"Marketing Strategy","sk4":"Agile Management","sk5":"AI Tools","experience":"Experience","expand-hint":"↓ Click to expand","j1t":"Digital Project Manager","j1b1":"Manage online campaigns","j1b2":"Coordinate cross-functional teams","j1b3":"Track deadlines & budgets","j2t":"Digital Marketing Manager","j2b1":"Web content creation","j2b2":"SEO & performance optimization","j2b3":"Analyze results & KPIs","j3t":"Communications Officer","j3b1":"Manage external partnerships","j3b2":"Execute promotional activities","j3b3":"Monitor reporting & indicators","education":"Education","univ":"Univ. Any City","e1t":"Master's | Digital Management","e1b1":"Complex project management","e1b2":"Digital transformation & strategy","e1b3":"Data analysis & KPIs","e2t":"Bachelor's | Communication","e2b1":"Digital & social media strategy","e2b2":"Market analysis & SEO","e2b3":"Writing & storytelling","e3t":"DUT | Communication","e3b1":"Digital content creation","e3b2":"Web project management","e3b3":"Digital marketing basics","proj-heading":"Featured Projects","proj-sub":"Click a card to view details","m-overview":"Overview","m-gallery":"Screenshots","m-results":"Key Results","view-project":"View Project","view-github":"GitHub","img-placeholder":"Add your screenshot here","footer":"© 2025 Léa Dupont — Digital Project Manager"},
+  ja:{"nav-resume":"履歴書","nav-projects":"プロジェクト","title":"デジタルPM","languages":"言語スキル","l-fr":"フランス語","l-en":"英語","l-es":"スペイン語","l-ko":"韓国語","native":"母国語","skills-lbl":"スキル","sk1":"チームワーク","sk2":"Webコミュニケーション","sk3":"マーケティング戦略","sk4":"アジャイル管理","sk5":"AIツール活用","experience":"職歴","expand-hint":"↓ クリックして展開","j1t":"デジタルPM","j1b1":"オンラインキャンペーン管理","j1b2":"チーム横断コーディネート","j1b3":"スケジュール・予算管理","j2t":"デジタルマーケティングMgr","j2b1":"Webコンテンツ制作","j2b2":"SEO・パフォーマンス最適化","j2b3":"結果・KPI分析","j3t":"コミュニケーション担当","j3b1":"外部パートナー管理","j3b2":"プロモーション活動展開","j3b3":"レポーティング管理","education":"学歴","univ":"エニーシティ大学","e1t":"修士 | デジタル経営","e1b1":"複雑プロジェクト管理","e1b2":"デジタル変革と戦略","e1b3":"データ分析とKPI","e2t":"学士 | コミュニケーション","e2b1":"デジタル・SNS戦略","e2b2":"市場分析とSEO","e2b3":"ライティングとストーリーテリング","e3t":"準学士 | コミュニケーション","e3b1":"デジタルコンテンツ制作","e3b2":"Webプロジェクト管理","e3b3":"デジタルマーケティング基礎","proj-heading":"注目プロジェクト","proj-sub":"カードをクリックして詳細を確認","m-overview":"概要","m-gallery":"スクリーンショット","m-results":"主な成果","view-project":"プロジェクトを見る","view-github":"GitHub","img-placeholder":"スクリーンショットを追加","footer":"© 2025 Léa Dupont — デジタルPM"}
 };
 
-/* ── Project Data ── */
-const P = {
-  p1:{icon:"🛍️",
-    titles:{zh:"Liceria 品牌電商全站改版",en:"Liceria Brand Website Revamp",ja:"Liceria ブランドサイト刷新"},
-    tags:["E-commerce","SEO","UX","2024"],
-    overviews:{zh:"主導品牌官網整體重構計畫，從資訊架構規劃、視覺設計到 SEO 關鍵字策略全程統籌，與開發、設計、行銷三個團隊協作推進。",en:"Led a full-scale brand website rebuild covering IA, visual design, and SEO strategy in collaboration with dev, design, and marketing teams.",ja:"情報アーキテクチャからSEO戦略まで、複数チームと協働しサイト全面刷新を主導。"},
-    results:{zh:["有機搜尋流量提升 42%","跳出率下降 18%","頁面載入速度優化至 1.8 秒以內","上線 3 個月內達成 ROI 目標"],en:["Organic traffic +42%","Bounce rate –18%","Page load time under 1.8s","ROI target met within 3 months"],ja:["オーガニックトラフィック42%増","直帰率18%減","ページ読み込み1.8秒以内","3ヶ月以内にROI目標達成"]},link:"#"},
-  p2:{icon:"📊",
-    titles:{zh:"數位行銷 KPI 儀表板",en:"Digital Marketing KPI Dashboard",ja:"デジタルKPIダッシュボード"},
-    tags:["Analytics","Data Studio","Marketing","2023"],
-    overviews:{zh:"設計並建置整合 Google Analytics、Meta Ads、LinkedIn 等平台的即時行銷數據儀表板，讓管理層能即時掌握關鍵績效指標。",en:"Designed and built a real-time KPI dashboard integrating Google Analytics, Meta Ads, and LinkedIn for executive decision-making.",ja:"Google Analytics・Meta Ads・LinkedInを統合したリアルタイムKPIダッシュボードを設計・構築。"},
-    results:{zh:["報表製作時間縮短 70%","管理層決策效率提升","跨部門數據共享流程標準化","獲選為公司年度最佳內部工具"],en:["Report time –70%","Faster executive decisions","Standardized cross-dept data sharing","Top internal tool of the year"],ja:["レポート作成時間70%削減","経営判断スピード向上","部門横断データ共有標準化","年間最優秀社内ツール受賞"]},link:"#"},
-  p3:{icon:"🤖",
-    titles:{zh:"AI 內容自動化工作流",en:"AI Content Automation Workflow",ja:"AIコンテンツ自動化"},
-    tags:["AI","Automation","GPT","2024"],
-    overviews:{zh:"研究並導入 AI 寫作工具與自動化流程，建立從選題、初稿生成到 SEO 優化的完整內容生產管線，大幅降低人工成本。",en:"Researched and implemented AI writing and automation pipelines building an end-to-end content workflow from ideation to SEO-optimized drafts.",ja:"AIライティングツールと自動化パイプラインを導入し、企画からSEO最適化ドラフト生成まで一貫したフローを構築。"},
-    results:{zh:["內容產出速度提升 3 倍","每篇文章製作成本降低 55%","內容品質一致性顯著提升","已複製推廣至其他事業部"],en:["Content output speed 3×","Cost per article –55%","Significant quality consistency","Scaled to other business units"],ja:["コンテンツ制作速度3倍","記事コスト55%削減","品質一貫性向上","他事業部への展開成功"]},link:"#"},
-  p4:{icon:"📣",
-    titles:{zh:"Shodwe 年度品牌推廣活動",en:"Shodwe Annual Brand Campaign",ja:"Shodwe 年間ブランドキャンペーン"},
-    tags:["PR","Events","Multi-channel","2021"],
-    overviews:{zh:"全程統籌 Shodwe 年度最大規模行銷活動，協調線上廣告、線下活動、媒體公關三條並行戰線，管理 5 個外部合作夥伴。",en:"Orchestrated Shodwe's largest annual campaign coordinating online ads, offline events, and media PR across 5 external partners.",ja:"オンライン広告・オフラインイベント・メディアPRを並行展開する年間最大規模キャンペーンを統括。外部5社管理。"},
-    results:{zh:["品牌知名度調查分數成長 28%","活動觸及人次突破 50 萬","媒體報導量超過預期 2 倍","預算執行率達 98%，零超支"],en:["Brand awareness +28%","Reach exceeded 500K","Media coverage 2× target","98% budget utilization, zero overrun"],ja:["ブランド認知度28%向上","リーチ50万人超","メディア掲載数目標の2倍","予算執行率98%、超過ゼロ"]},link:"#"},
-  p5:{icon:"📱",
-    titles:{zh:"社群媒體增長策略",en:"Social Media Growth Strategy",ja:"SNS成長戦略"},
-    tags:["Social","Instagram","LinkedIn","TikTok"],
-    overviews:{zh:"為品牌制定 Instagram、LinkedIn、TikTok 三平台並行的內容策略，建立內容日曆、創作指引與效果評估機制。",en:"Developed a three-platform content strategy for Instagram, LinkedIn, and TikTok with content calendars and performance frameworks.",ja:"Instagram・LinkedIn・TikTokの3プラットフォーム戦略を策定し、コンテンツカレンダーとガイドラインを構築。"},
-    results:{zh:["Instagram 追蹤者 6 個月成長 89%","LinkedIn 互動率提升 3.2 倍","TikTok 首月影片觸及 10 萬次","內容生產流程效率提升 40%"],en:["Instagram followers +89% in 6 months","LinkedIn engagement 3.2×","TikTok first-month reach 100K","Content efficiency +40%"],ja:["Instagramフォロワー6ヶ月で89%増","LinkedInエンゲージメント3.2倍","TikTok初月リーチ10万回","コンテンツ制作効率40%向上"]},link:"#"},
-  p6:{icon:"🎓",
-    titles:{zh:"數位轉型策略研究論文",en:"Digital Transformation Research Thesis",ja:"デジタル変革戦略研究論文"},
-    tags:["Research","Strategy","SME","2022"],
-    overviews:{zh:"碩士畢業論文研究，針對中小企業數位轉型現況進行實證研究，建立包含 KPI 評估框架的轉型成熟度模型，獲得最高評分。",en:"Master's thesis with empirical research on SME digital transformation, proposing a maturity model with KPI framework, receiving the highest grade.",ja:"中小企業のデジタル変革をテーマにした修士論文。KPI評価フレームワーク含む成熟度モデルを提案し最高評価を獲得。"},
-    results:{zh:["論文最終評分 A（最高等級）","研究樣本涵蓋 32 家企業","建立可複用的轉型評估框架","受邀於校內研討會發表"],en:["Final grade: A (highest)","32 companies researched","Reusable transformation framework","Invited to university symposium"],ja:["最終評価：A（最高評価）","32社対象の実証研究","再利用可能な評価フレームワーク","大学シンポジウムで発表"]},link:"#"}
-};
+const PROJECTS=[
+  {id:"p1",emoji:"🛍️",image:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",thumbBg:"linear-gradient(135deg,#e0e4ff,#c8d0ff)",tags:["E-commerce","SEO","UX","2024"],titles:{zh:"Liceria 品牌電商全站改版",en:"Liceria Brand Website Revamp",ja:"Liceria ブランドサイト刷新"},descs:{zh:"主導品牌官網重構，整合 SEO 策略與 UX 優化，有效提升有機流量。",en:"Led full site rebuild integrating SEO and UX.",ja:"SEO戦略とUX改善を統合したサイト刷新を主導。"},overviews:{zh:"主導品牌官網整體重構計畫，從資訊架構規劃、視覺設計到 SEO 關鍵字策略全程統籌，與開發、設計、行銷三個團隊協作推進。",en:"Led a full-scale brand website rebuild covering IA, visual design, and SEO in collaboration with dev, design, and marketing teams.",ja:"情報アーキテクチャからSEO戦略まで、複数チームと協働しサイト全面刷新を主導。"},gallery:["https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=75","https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=75",null],results:{zh:["有機搜尋流量提升 42%","跳出率下降 18%","頁面載入速度優化至 1.8 秒以內","上線 3 個月內達成 ROI 目標"],en:["Organic traffic +42%","Bounce rate –18%","Page load under 1.8s","ROI target met within 3 months"],ja:["オーガニックトラフィック42%増","直帰率18%減","ページ読み込み1.8秒以内","3ヶ月以内にROI目標達成"]},link:"#",github:""},
+  {id:"p2",emoji:"📊",image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",thumbBg:"linear-gradient(135deg,#d4f5e9,#a8e6cc)",tags:["Analytics","Data Studio","Marketing","2023"],titles:{zh:"數位行銷 KPI 儀表板",en:"Digital Marketing KPI Dashboard",ja:"デジタルKPIダッシュボード"},descs:{zh:"建立即時行銷數據追蹤系統，整合多平台數據，提升決策效率。",en:"Built real-time marketing analytics across multiple platforms.",ja:"複数プラットフォームのリアルタイム分析システムを構築。"},overviews:{zh:"設計並建置整合 GA、Meta Ads、LinkedIn 等平台的即時行銷數據儀表板。",en:"Designed a real-time KPI dashboard integrating GA, Meta Ads, and LinkedIn.",ja:"GA・Meta Ads・LinkedInを統合したリアルタイムKPIダッシュボードを設計・構築。"},gallery:["https://images.unsplash.com/photo-1543286386-713bdd548da4?w=600&q=75",null,null],results:{zh:["報表製作時間縮短 70%","管理層決策效率提升","跨部門數據共享標準化","獲選年度最佳內部工具"],en:["Report time –70%","Faster decisions","Standardized data sharing","Top internal tool"],ja:["レポート作成時間70%削減","経営判断スピード向上","データ共有標準化","年間最優秀社内ツール"]},link:"#",github:""},
+  {id:"p3",emoji:"🤖",image:"https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80",thumbBg:"linear-gradient(135deg,#fff0d4,#ffd99a)",tags:["AI","Automation","GPT","2024"],titles:{zh:"AI 內容自動化工作流",en:"AI Content Automation Workflow",ja:"AIコンテンツ自動化"},descs:{zh:"導入 AI 工具實現內容生產自動化，大幅縮短製作週期。",en:"Implemented AI tools to automate content production.",ja:"AIツールでコンテンツ制作を自動化。"},overviews:{zh:"研究並導入 AI 寫作工具，建立從選題到 SEO 優化的完整內容生產管線。",en:"Researched and implemented AI writing pipelines from ideation to SEO-optimized drafts.",ja:"AIライティングツールを導入し、企画からSEO最適化ドラフト生成まで構築。"},gallery:[null,null,null],results:{zh:["內容產出速度提升 3 倍","每篇文章製作成本降低 55%","品質一致性顯著提升","已複製推廣至其他事業部"],en:["Content output 3×","Cost per article –55%","Quality consistency improved","Scaled to other units"],ja:["制作速度3倍","記事コスト55%削減","品質一貫性向上","他事業部への展開"]},link:"#",github:""},
+  {id:"p4",emoji:"📣",image:null,thumbBg:"linear-gradient(135deg,#ffe0f0,#ffb3d6)",tags:["PR","Events","Multi-channel","2021"],titles:{zh:"Shodwe 年度品牌推廣活動",en:"Shodwe Annual Brand Campaign",ja:"Shodwe 年間ブランドキャンペーン"},descs:{zh:"統籌執行跨通路品牌推廣計畫，管理多個外部合作夥伴。",en:"Orchestrated cross-channel brand campaign managing multiple partners.",ja:"クロスチャネルキャンペーンを統括。"},overviews:{zh:"全程統籌 Shodwe 年度最大規模行銷活動，協調線上廣告、線下活動、媒體公關，管理 5 個外部合作夥伴。",en:"Orchestrated Shodwe's largest annual campaign across online ads, events, and media PR with 5 partners.",ja:"オンライン広告・オフラインイベント・メディアPRを並行展開。外部5社管理。"},gallery:[null,null],results:{zh:["品牌知名度調查分數成長 28%","活動觸及人次突破 50 萬","媒體報導量超過預期 2 倍","預算執行率達 98%"],en:["Brand awareness +28%","Reach 500K+","Media coverage 2× target","98% budget utilization"],ja:["ブランド認知度28%向上","リーチ50万人超","メディア掲載数目標2倍","予算執行率98%"]},link:"#",github:""},
+  {id:"p5",emoji:"📱",image:"https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80",thumbBg:"linear-gradient(135deg,#e8f0fe,#b8ccfe)",tags:["Social","Instagram","LinkedIn","TikTok"],titles:{zh:"社群媒體增長策略",en:"Social Media Growth Strategy",ja:"SNS成長戦略"},descs:{zh:"制定並執行跨平台社群內容策略，顯著提升品牌互動率。",en:"Designed and executed cross-platform content strategy.",ja:"クロスプラットフォームのコンテンツ戦略を策定・実行。"},overviews:{zh:"為品牌制定 Instagram、LinkedIn、TikTok 三平台並行的內容策略，建立內容日曆與效果評估機制。",en:"Developed a three-platform content strategy with content calendars and performance frameworks.",ja:"Instagram・LinkedIn・TikTokの3プラットフォーム戦略を策定し、コンテンツカレンダーを構築。"},gallery:["https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=75",null],results:{zh:["Instagram 追蹤者 6 個月成長 89%","LinkedIn 互動率提升 3.2 倍","TikTok 首月觸及 10 萬次","內容生產效率提升 40%"],en:["Instagram +89% in 6 months","LinkedIn engagement 3.2×","TikTok 100K first month","Content efficiency +40%"],ja:["Instagramフォロワー89%増","LinkedInエンゲージメント3.2倍","TikTok初月10万回","コンテンツ効率40%向上"]},link:"#",github:""},
+  {id:"p6",emoji:"🎓",image:null,thumbBg:"linear-gradient(135deg,#f0ffe8,#c8f5a8)",tags:["Research","Strategy","SME","2022"],titles:{zh:"數位轉型策略研究論文",en:"Digital Transformation Thesis",ja:"デジタル変革研究論文"},descs:{zh:"碩士畢業研究，聚焦中小企業數位轉型路徑與成效評估框架。",en:"Master's thesis on SME digital transformation and KPI evaluation.",ja:"中小企業のデジタル変革とKPI評価に関する修士論文。"},overviews:{zh:"碩士畢業論文，針對中小企業數位轉型進行實證研究，建立含 KPI 評估框架的成熟度模型，獲得最高評分。",en:"Master's thesis with empirical research on SME digital transformation, proposing a maturity model with KPI framework.",ja:"中小企業のデジタル変革をテーマにした修士論文。KPI評価フレームワーク含む成熟度モデルを提案し最高評価獲得。"},gallery:[null,null],results:{zh:["論文最終評分 A（最高等級）","研究樣本涵蓋 32 家企業","建立可複用的轉型評估框架","受邀於校內研討會發表"],en:["Final grade: A (highest)","32 companies researched","Reusable transformation framework","Presented at symposium"],ja:["最終評価A（最高評価）","32社対象の実証研究","再利用可能な評価フレームワーク","シンポジウムで発表"]},link:"#",github:""}
+];
 
-/* ── State ── */
-let lang = 'zh';
+let lang='zh';
 
-/* ── Language ── */
 function setLang(l){
-  lang = l;
+  lang=l;
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`).classList.add('active');
-  const d = D[l];
-  document.querySelectorAll('[data-i18n]').forEach(el=>{
-    const k = el.getAttribute('data-i18n');
-    if(d[k]) el.textContent = d[k];
-  });
+  const d=D[l];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(d[k])el.textContent=d[k]});
+  renderCards();
 }
 
-/* ── Page Switch ── */
 function showPage(id){
   document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  const tab = document.querySelector(`.nav-tab[onclick="showPage('${id}')"]`);
-  if(tab) tab.classList.add('active');
+  const tab=document.querySelector(`.nav-tab[onclick="showPage('${id}')"]`);
+  if(tab)tab.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+  const cv=document.getElementById('mesh-canvas');
+  if(id==='resume'){cv.classList.remove('hidden');window._mesh.start()}
+  else{cv.classList.add('hidden');window._mesh.stop()}
+  if(id==='projects')renderCards();
   setTimeout(()=>{
-    document.querySelectorAll('#page-'+id+' .fade-up').forEach((el,i)=>{
-      el.classList.remove('visible');
-      setTimeout(()=>el.classList.add('visible'),i*65);
-    });
-  },20);
+    document.querySelectorAll('#page-'+id+' .fade-up').forEach((el,i)=>{el.classList.remove('visible');setTimeout(()=>el.classList.add('visible'),i*65)});
+  },30);
 }
 
-/* ── Modal ── */
+function renderCards(){
+  const grid=document.getElementById('proj-grid'),d=D[lang];
+  grid.innerHTML=PROJECTS.map(p=>{
+    const thumb=p.image?`<img src="${p.image}" alt="${p.titles[lang]}" loading="lazy">`:`<div class="proj-thumb-emoji">${p.emoji}</div>`;
+    const tags=p.tags.map((t,i)=>`<span class="tag ${i===0?'tb':'to'}">${t}</span>`).join('');
+    return `<div class="proj-card fade-up" onclick="openModal('${p.id}')"><div class="proj-thumb" style="background:${p.thumbBg}">${thumb}<div class="proj-thumb-overlay">${d['view-project']||'查看'}</div></div><div class="proj-body"><div class="proj-tags">${tags}</div><div class="proj-title">${p.titles[lang]}</div><div class="proj-desc">${p.descs[lang]}</div></div></div>`;
+  }).join('');
+  grid.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+}
+
 function openModal(id){
-  const p = P[id], d = D[lang];
-  document.getElementById('m-icon').textContent = p.icon;
-  document.getElementById('m-title').textContent = p.titles[lang];
-  document.getElementById('m-tags').innerHTML = p.tags.map((t,i)=>`<span class="tag ${i===0?'tb':'to'}">${t}</span>`).join('');
-  document.getElementById('m-ov-lbl').textContent = d['m-overview'];
-  document.getElementById('m-overview').textContent = p.overviews[lang];
-  document.getElementById('m-res-lbl').textContent = d['m-results'];
-  document.getElementById('m-results').innerHTML = p.results[lang].map(r=>`<li>${r}</li>`).join('');
-  document.getElementById('m-link').href = p.link;
-  document.getElementById('m-link-txt').textContent = d['view-project'];
+  const p=PROJECTS.find(x=>x.id===id),d=D[lang];
+  const banner=document.getElementById('m-banner');
+  if(p.image){banner.innerHTML=`<img src="${p.image}" alt="">`;banner.style.background='#111'}
+  else{banner.innerHTML=`<div class="m-banner-emoji">${p.emoji}</div>`;banner.style.background=p.thumbBg}
+  document.getElementById('m-tags').innerHTML=p.tags.map((t,i)=>`<span class="tag ${i===0?'tb':'to'}">${t}</span>`).join('');
+  document.getElementById('m-title').textContent=p.titles[lang];
+  document.getElementById('m-ov-lbl').textContent=d['m-overview'];
+  document.getElementById('m-overview').textContent=p.overviews[lang];
+  const galSec=document.getElementById('m-gallery-sec');
+  document.getElementById('m-gallery-lbl').textContent=d['m-gallery'];
+  if(p.gallery&&p.gallery.length){
+    galSec.style.display='block';
+    document.getElementById('m-gallery').innerHTML=p.gallery.map(src=>src
+      ?`<div class="m-gallery-item" onclick="openLightbox('${src}')"><img src="${src}" loading="lazy" alt=""></div>`
+      :`<div class="m-gallery-item"><div class="m-gallery-placeholder"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>${d['img-placeholder']}</span></div></div>`
+    ).join('');
+  }else{galSec.style.display='none'}
+  document.getElementById('m-res-lbl').textContent=d['m-results'];
+  document.getElementById('m-results').innerHTML=p.results[lang].map(r=>`<li>${r}</li>`).join('');
+  let acts='';
+  if(p.link&&p.link!=='#')acts+=`<a href="${p.link}" class="m-link" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>${d['view-project']}</a>`;
+  if(p.github&&p.github!=='')acts+=`<a href="${p.github}" class="m-link m-link-ghost" target="_blank" rel="noopener">${d['view-github']}</a>`;
+  document.getElementById('m-actions').innerHTML=acts;
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeModal(){
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-function closeOut(e){ if(e.target===document.getElementById('modal-overlay')) closeModal(); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow=''}
+function closeOut(e){if(e.target===document.getElementById('modal-overlay'))closeModal()}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('open')}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeLightbox()}});
 
-/* ── Scroll Animations ── */
-const io = new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*65); io.unobserve(e.target); }
-  });
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*65);io.unobserve(e.target)}});
 },{threshold:.08});
 document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
 </script>
