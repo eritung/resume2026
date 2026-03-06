@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Léa Dupont — CV</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F3EE;
+    --surface: #FFFFFF;
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --accent: #1A3AFF;
+    --accent-dark: #0020CC;
+    --tag-bg: #1A3AFF;
+    --tag-text: #fff;
+    --border: #e0dfd8;
+    --card-shadow: 0 2px 20px rgba(0,0,0,0.07);
+    --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Language Switcher ── */
+  .lang-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 14px 40px;
+    background: rgba(244,243,238,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lang-btns { display: flex; gap: 6px; }
+
+  .lang-btn {
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: var(--transition);
+  }
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .lang-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* ── Main Layout ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 24px 60px;
+  }
+
+  /* ── Hero Section ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: center;
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 44px 48px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 220px; height: 220px;
+    border: 2.5px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border: 2.5px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.1;
+  }
+
+  .avatar-wrap {
+    position: relative;
+    width: 180px; height: 180px;
+    margin: 0 auto;
+  }
+  .avatar-ring {
+    position: absolute;
+    inset: -12px;
+    border: 2.5px solid var(--accent);
+    border-radius: 50%;
+    animation: spin-slow 18s linear infinite;
+    border-top-color: transparent;
+    border-right-color: transparent;
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .avatar-img {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: #ddd;
+  }
+  .avatar-placeholder {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8caff 0%, #a0a6ff 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    user-select: none;
+  }
+
+  .hero-info { position: relative; z-index: 1; }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .contact-pills { display: flex; flex-direction: column; gap: 8px; }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.88rem;
+    color: var(--text);
+    text-decoration: none;
+    width: fit-content;
+    transition: var(--transition);
+    background: transparent;
+  }
+  .contact-pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+  .contact-pill svg { flex-shrink: 0; }
+
+  /* ── Two-column body ── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+  .sidebar-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .sidebar-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+
+  .lang-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .lang-list li {
+    font-size: 0.88rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .lang-list .level {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  .skills-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .skills-list li {
+    font-size: 0.88rem;
+    padding-left: 14px;
+    position: relative;
+    color: var(--text);
+  }
+  .skills-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ── Main Column ── */
+  .main-col { display: flex; flex-direction: column; gap: 24px; }
+
+  .section-card {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 32px 32px 28px;
+    box-shadow: var(--card-shadow);
+  }
+
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 20px;
+    margin-bottom: 28px;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── Experience Item ── */
+  .exp-item {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .exp-item:last-child { margin-bottom: 0; }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 6px;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    transition: var(--transition);
+  }
+  .exp-item:hover::before { transform: scale(1.6); }
+
+  .exp-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+
+  .exp-role {
+    font-weight: 600;
+    font-size: 0.97rem;
+    margin-bottom: 8px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.77rem;
+    font-weight: 500;
+  }
+  .tag-blue { background: var(--tag-bg); color: var(--tag-text); }
+  .tag-outline {
+    border: 1.5px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+  }
+
+  .exp-details {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.35s;
+    opacity: 0;
+  }
+  .exp-item.open .exp-details { max-height: 200px; opacity: 1; }
+
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+  .exp-bullets li {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    padding-left: 14px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+
+  .expand-hint {
+    font-size: 0.74rem;
+    color: var(--accent);
+    margin-top: 4px;
+    opacity: 0.7;
+    transition: var(--transition);
+  }
+  .exp-item:hover .expand-hint { opacity: 1; }
+  .exp-item.open .expand-hint { opacity: 0; height: 0; overflow: hidden; }
+
+  /* ── Divider ── */
+  .exp-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  /* ── Animations on load ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 680px) {
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 36px 24px;
+      gap: 24px;
+    }
+    .avatar-wrap { margin: 0 auto; }
+    .contact-pills { align-items: center; }
+    .body-grid { grid-template-columns: 1fr; }
+    .sidebar { flex-direction: row; flex-wrap: wrap; }
+    .sidebar-card { flex: 1; min-width: 160px; }
+    .lang-bar { padding: 12px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language Bar -->
+<div class="lang-bar">
+  <div class="lang-btns">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero fade-up">
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <div class="avatar-placeholder">👩‍💻</div>
+    </div>
+    <div class="hero-info">
+      <h1 class="hero-name">LÉA DUPONT</h1>
+      <p class="hero-title" data-i18n="title">Cheffe de projet digitale</p>
+      <div class="contact-pills">
+        <a href="mailto:hello@reallygreatsite.com" class="contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          hello@reallygreatsite.com
+        </a>
+        <a href="tel:+1234567890" class="contact-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.34h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.13 6.13l1.02-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +123-456-7890
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body-grid">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-card fade-up">
+        <div class="sidebar-label" data-i18n="languages">Langues</div>
+        <ul class="lang-list">
+          <li><span data-i18n="lang-fr">Français</span> <span class="level" data-i18n="native">Native</span></li>
+          <li><span data-i18n="lang-en">Anglais</span> <span class="level">C1</span></li>
+          <li><span data-i18n="lang-es">Espagnol</span> <span class="level">B2</span></li>
+          <li><span data-i18n="lang-ko">Coréen</span> <span class="level">A2</span></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card fade-up">
+        <div class="sidebar-label" data-i18n="skills-label">Compétences</div>
+        <ul class="skills-list">
+          <li data-i18n="skill1">Collaboration d'équipe</li>
+          <li data-i18n="skill2">Communication web</li>
+          <li data-i18n="skill3">Stratégie marketing</li>
+          <li data-i18n="skill4">Gestion de projet agile</li>
+          <li data-i18n="skill5">Maîtrise des outils IA</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main-col">
+
+      <!-- Experience -->
+      <div class="section-card fade-up">
+        <div class="section-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          <span data-i18n="experience">Expériences</span>
+        </div>
+
+        <!-- Job 1 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="job1-title">Cheffe de projet digital</div>
+          <div class="exp-line">
+            <span class="tag tag-blue">Liceria, Inc.</span>
+            <span class="tag tag-outline">2024–2025</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="job1-b1">Piloter les campagnes en ligne</li>
+              <li data-i18n="job1-b2">Coordonner les équipes</li>
+              <li data-i18n="job1-b3">Suivre les délais et les budgets</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-divider"></div>
+
+        <!-- Job 2 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="job2-title">Responsable marketing digital</div>
+          <div class="exp-line">
+            <span class="tag tag-blue">Liceria, Inc.</span>
+            <span class="tag tag-outline">2022–2023</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="job2-b1">Création de contenus web</li>
+              <li data-i18n="job2-b2">Optimiser SEO et performances</li>
+              <li data-i18n="job2-b3">Analyser les résultats et KPIs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-divider"></div>
+
+        <!-- Job 3 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="job3-title">Chargée de communication</div>
+          <div class="exp-line">
+            <span class="tag tag-blue">Shodwe, Inc.</span>
+            <span class="tag tag-outline">2020–2021</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="job3-b1">Gérer les partenariats externes</li>
+              <li data-i18n="job3-b2">Déployer les actions promotionnelles</li>
+              <li data-i18n="job3-b3">Suivre le reporting et les indicateurs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section-card fade-up">
+        <div class="section-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          <span data-i18n="education">Formations</span>
+        </div>
+
+        <!-- Edu 1 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="edu1-title">Master +5 | Management digital</div>
+          <div class="exp-line">
+            <span class="tag tag-blue" data-i18n="univ">Univ. Any City</span>
+            <span class="tag tag-outline">2020–2022</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="edu1-b1">Pilotage de projets complexes</li>
+              <li data-i18n="edu1-b2">Transformation digitale et stratégie</li>
+              <li data-i18n="edu1-b3">Analyse de données et KPIs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-divider"></div>
+
+        <!-- Edu 2 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="edu2-title">Licence +3 | Communication</div>
+          <div class="exp-line">
+            <span class="tag tag-blue" data-i18n="univ">Univ. Any City</span>
+            <span class="tag tag-outline">2019–2020</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="edu2-b1">Stratégie digitale et social media</li>
+              <li data-i18n="edu2-b2">Analyse de marché et SEO</li>
+              <li data-i18n="edu2-b3">Rédaction et storytelling</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-divider"></div>
+
+        <!-- Edu 3 -->
+        <div class="exp-item" onclick="toggleExp(this)">
+          <div class="exp-role" data-i18n="edu3-title">DUT +1 | Communication</div>
+          <div class="exp-line">
+            <span class="tag tag-blue" data-i18n="univ">Univ. Any City</span>
+            <span class="tag tag-outline">2018–2019</span>
+          </div>
+          <div class="expand-hint" data-i18n="click-expand">↓ cliquez pour voir les détails</div>
+          <div class="exp-details">
+            <ul class="exp-bullets">
+              <li data-i18n="edu3-b1">Création de contenus numériques</li>
+              <li data-i18n="edu3-b2">Gestion de projets web</li>
+              <li data-i18n="edu3-b3">Bases de marketing digital</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer fade-up">
+    <span data-i18n="footer">© 2025 Léa Dupont — Cheffe de projet digitale</span>
+  </div>
+</div>
+
+<script>
+  // ── i18n ──────────────────────────────────────────────────────────────
+  const i18n = {
+    fr: {
+      title: "Cheffe de projet digitale",
+      languages: "Langues",
+      "lang-fr": "Français", "lang-en": "Anglais", "lang-es": "Espagnol", "lang-ko": "Coréen",
+      native: "Natif",
+      "skills-label": "Compétences",
+      skill1: "Collaboration d'équipe", skill2: "Communication web",
+      skill3: "Stratégie marketing", skill4: "Gestion de projet agile", skill5: "Maîtrise des outils IA",
+      experience: "Expériences",
+      "click-expand": "↓ cliquez pour voir les détails",
+      "job1-title": "Cheffe de projet digital",
+      "job1-b1": "Piloter les campagnes en ligne", "job1-b2": "Coordonner les équipes", "job1-b3": "Suivre les délais et les budgets",
+      "job2-title": "Responsable marketing digital",
+      "job2-b1": "Création de contenus web", "job2-b2": "Optimiser SEO et performances", "job2-b3": "Analyser les résultats et KPIs",
+      "job3-title": "Chargée de communication",
+      "job3-b1": "Gérer les partenariats externes", "job3-b2": "Déployer les actions promotionnelles", "job3-b3": "Suivre le reporting et les indicateurs",
+      education: "Formations",
+      univ: "Univ. Any City",
+      "edu1-title": "Master +5 | Management digital",
+      "edu1-b1": "Pilotage de projets complexes", "edu1-b2": "Transformation digitale et stratégie", "edu1-b3": "Analyse de données et KPIs",
+      "edu2-title": "Licence +3 | Communication",
+      "edu2-b1": "Stratégie digitale et social media", "edu2-b2": "Analyse de marché et SEO", "edu2-b3": "Rédaction et storytelling",
+      "edu3-title": "DUT +1 | Communication",
+      "edu3-b1": "Création de contenus numériques", "edu3-b2": "Gestion de projets web", "edu3-b3": "Bases de marketing digital",
+      footer: "© 2025 Léa Dupont — Cheffe de projet digitale"
+    },
+    en: {
+      title: "Digital Project Manager",
+      languages: "Languages",
+      "lang-fr": "French", "lang-en": "English", "lang-es": "Spanish", "lang-ko": "Korean",
+      native: "Native",
+      "skills-label": "Skills",
+      skill1: "Team Collaboration", skill2: "Web Communication",
+      skill3: "Marketing Strategy", skill4: "Agile Project Management", skill5: "AI Tools Proficiency",
+      experience: "Experience",
+      "click-expand": "↓ click to expand details",
+      "job1-title": "Digital Project Manager",
+      "job1-b1": "Manage online campaigns", "job1-b2": "Coordinate teams", "job1-b3": "Track deadlines and budgets",
+      "job2-title": "Digital Marketing Manager",
+      "job2-b1": "Create web content", "job2-b2": "Optimize SEO & performance", "job2-b3": "Analyze results and KPIs",
+      "job3-title": "Communications Officer",
+      "job3-b1": "Manage external partnerships", "job3-b2": "Deploy promotional activities", "job3-b3": "Monitor reporting and indicators",
+      education: "Education",
+      univ: "Univ. Any City",
+      "edu1-title": "Master's +5 | Digital Management",
+      "edu1-b1": "Complex project management", "edu1-b2": "Digital transformation & strategy", "edu1-b3": "Data analysis & KPIs",
+      "edu2-title": "Bachelor's +3 | Communication",
+      "edu2-b1": "Digital & social media strategy", "edu2-b2": "Market analysis & SEO", "edu2-b3": "Writing & storytelling",
+      "edu3-title": "DUT +1 | Communication",
+      "edu3-b1": "Digital content creation", "edu3-b2": "Web project management", "edu3-b3": "Digital marketing fundamentals",
+      footer: "© 2025 Léa Dupont — Digital Project Manager"
+    },
+    zh: {
+      title: "數位專案經理",
+      languages: "語言能力",
+      "lang-fr": "法語", "lang-en": "英語", "lang-es": "西班牙語", "lang-ko": "韓語",
+      native: "母語",
+      "skills-label": "專業技能",
+      skill1: "團隊協作", skill2: "網路行銷溝通",
+      skill3: "行銷策略規劃", skill4: "敏捷專案管理", skill5: "AI 工具應用",
+      experience: "工作經歷",
+      "click-expand": "↓ 點擊展開詳細內容",
+      "job1-title": "數位專案經理",
+      "job1-b1": "規劃與管理線上行銷活動", "job1-b2": "協調跨部門團隊合作", "job1-b3": "追蹤時程與預算控管",
+      "job2-title": "數位行銷主管",
+      "job2-b1": "網站內容創作與規劃", "job2-b2": "SEO 優化與效能提升", "job2-b3": "分析成效數據與 KPI",
+      "job3-title": "公關傳播專員",
+      "job3-b1": "管理對外合作夥伴關係", "job3-b2": "執行促銷與推廣活動", "job3-b3": "追蹤成效報告與指標",
+      education: "學歷",
+      univ: "任意城市大學",
+      "edu1-title": "碩士 | 數位管理",
+      "edu1-b1": "複雜專案統籌管理", "edu1-b2": "數位轉型與策略規劃", "edu1-b3": "數據分析與 KPI 應用",
+      "edu2-title": "學士 | 傳播學",
+      "edu2-b1": "數位與社群媒體策略", "edu2-b2": "市場分析與 SEO", "edu2-b3": "文案撰寫與內容敘事",
+      "edu3-title": "專科 | 傳播學",
+      "edu3-b1": "數位內容製作", "edu3-b2": "網站專案管理", "edu3-b3": "數位行銷基礎",
+      footer: "© 2025 Léa Dupont — 數位專案經理"
+    }
+  };
+
+  let currentLang = 'fr';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+    const dict = i18n[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+  }
+
+  // ── Toggle expand ──────────────────────────────────────────────────────
+  function toggleExp(el) {
+    el.classList.toggle('open');
+  }
+
+  // ── Scroll-triggered fade-up ───────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
